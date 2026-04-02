@@ -254,29 +254,14 @@ Image Editor/
 
 ## Troubleshooting 🔧
 
-### Q: Image isn't showing after upload
-
-**A:** Check file format (JPG, PNG, GIF, WebP supported) • Verify file isn't corrupted by opening in image viewer • Try a different image to isolate the issue • Clear browser cache and reload
-
-### Q: Filters are slow or laggy
-
-**A:** Try with a smaller image (resize before uploading) • Close other browser tabs to free up memory • Update your browser to the latest version • Note: Large images (>8MP) may show lag on older devices
-
-### Q: Preset highlighting isn't visible
-
-**A:** Ensure you're using a modern browser (Chrome, Firefox, Edge, Safari) • The preset button should glow blue when selected • Click any other preset, then click back to see the highlight • Try refreshing the page if highlighting seems stuck
-
-### Q: Export button creates blank or corrupted file
-
-**A:** Ensure an image has been uploaded • Try resetting filters first, then re-applying them • Use a different image to test • Check browser permissions for downloads • Try a different browser if issue persists
-
-### Q: Some filters aren't having visible effect
-
-**A:** This is normal! Some filters are subtle by design. Try extreme values (max slider position) to see the effect. Combine with other filters for more visible impact.
-
-### Q: Can I undo my changes?
-
-**A:** Click the **Reset** button to clear all edits instantly. There's no multi-level undo, but Reset returns everything to original.
+| Issue | Solution |
+|-------|----------|
+| **Image not showing** | Check file format (JPG, PNG, GIF, WebP) - Verify file isn't corrupted - Try different image - Clear browser cache |
+| **Filters are slow** | Use smaller image - Close other browser tabs - Update browser - Large images (>8MP) may lag |
+| **Preset highlighting not visible** | Use modern browser (Chrome, Firefox, Safari, Edge) - Click another preset then back - Try page refresh |
+| **Export creates blank file** | Ensure image is uploaded - Reset filters then reapply - Use different image - Check download permissions |
+| **Filters have no effect** | Normal for subtle filters - Try max slider values - Combine with other filters |
+| **Can't undo changes** | Click **Reset** to restore all filters instantly - No multi-level undo, but one-click reset always available |
 
 ## Performance 🚀
 
@@ -304,143 +289,10 @@ Lumina uses the **HTML5 Canvas API** combined with modern CSS filters to deliver
 6. User can download the final result as PNG
 
 **Performance Optimization:**
-
-- Filters are applied using native browser APIs (no heavy computation)
+- Filters use native browser APIs (no heavy computation)
 - Real-time processing at 60+ frames per second on modern browsers
 - Minimal memory footprint with efficient DOM manipulation
 - Lazy loading of preset data
-
-### Filter System
-
-Each filter is implemented using CSS filter properties:
-
-- **Brightness & Contrast** - Adjust luminance and dynamic range
-- **Saturation** - Modify color intensity without changing hue
-- **Hue Rotation** - Shift colors around the RGB color wheel
-- **Blur** - Apply Gaussian blur using GPU acceleration
-- **Grayscale & Sepia** - Color space transformations
-- **Invert** - Bitwise color inversion for negative effect
-- **Opacity** - Alpha channel manipulation
-
-### Preset System
-
-Presets are data structures containing predefined values for all 9 filters. When applied:
-
-1. All filter values are updated simultaneously
-2. Canvas re-renders with combined filter effects
-3. UI sliders update to reflect new values
-4. Preset button highlighting indicates active selection
-5. User can further adjust individual sliders for fine-tuning
-
-### State Management
-
-The filtering engine maintains state through a centralized `filters` object:
-
-- Stores current value for each of the 9 filters
-- Tracks min/max ranges and units for validation
-- Enables undo functionality through state snapshots
-- Persists settings during the editing session
-
-### Event System
-
-Real-time responsiveness is achieved through:
-
-- Input event listeners on all sliders (capture phase)
-- Preset button click handlers with proper event delegation
-- Canvas update triggers on every state change
-- Debounced re-rendering for performance (if needed)
-
-## Customization & Extension Guide 🔧
-
-### Adding New Presets
-
-Lumina is highly customizable. To add new preset filters:
-
-**For Photographers & Designers:**
-
-- Edit the `presets` object in `script.js`
-- Add a new preset entry with custom filter values
-- Each preset needs all 9 filter properties defined
-- Values must be within acceptable ranges:
-  - Brightness, Contrast, Saturation, Grayscale, Sepia, Invert: 0-200%
-  - Opacity: 0-100%
-  - Hue Rotation: 0-360°
-  - Blur: 0-20px
-- New presets appear as buttons in the Presets section automatically
-
-**Preset Structure Example:**
-
-```
-myCustomPreset: {
-  brightness: 110,
-  contrast: 120,
-  saturation: 130,
-  hueRotation: 0,
-  blur: 0,
-  grayscale: 0,
-  sepia: 10,
-  invert: 0,
-  opacity: 100
-}
-```
-
-### Modifying Slider Ranges
-
-To change adjustment ranges for any filter:
-
-- Edit the `filters` object in `script.js`
-- Modify the `min` and `max` properties for any filter
-- Users can then adjust values within your new range
-- Range changes are immediate and reflected in UI
-- **Example:** To allow Saturation up to 300% instead of 200%:
-  - Find: `max: 200` in saturation filter
-  - Change to: `max: 300`
-
-### Styling Customization
-
-Comprehensive theming options:
-
-- Edit `style.scss` for layout, colors, spacing, and typography
-- Update theme variables in `theme.css` for quick color changes
-- SCSS compiles to CSS automatically
-- CSS custom properties enable dark/light mode implementations
-- All colors are centralized making full rebranding quick and easy
-
-### Adding New Filters
-
-Advanced users can add custom filters:
-
-1. Add new filter object to `filters` object with ranges
-2. Add filter application in the `applyFilters()` function
-3. Create corresponding UI in `createFilterElement()`
-4. Test with various images for smooth performance
-5. Document the new filter for users
-
-### Theme Customization
-
-**Color Scheme Changes:**
-
-- Open `theme.css` to find main color variables
-- Modify colors for buttons, background, text
-- Changes instantly propagate throughout the interface
-- Try different color palettes for dark/light modes
-
-**Button Colors:**
-
-- Upload button: `.upload` in `style.scss` - default #2563eb (blue)
-- Reset button: `.reset` in `style.scss` - default #ef4444 (red)
-- Export button: `.export` in `style.scss` - default #22c55e (green)
-
-### Community Contribution Ideas
-
-Popular preset ideas perfect for contribution:
-
-- **Seasonal Effects**: Spring bloom, Summer heat, Fall warmth, Winter chill
-- **Time-based**: Golden Hour, Blue Hour, Midday sun, Twilight
-- **Photography Styles**: Automotive, Food, Product, Landscape, Macro
-- **Decade Vibes**: 1920s Art Deco, 1950s Film, 1970s Disco, 1990s Grunge, Y2K
-- **Mood-based**: Energetic & Exciting, Calm & Peaceful, Mysterious & Dark, Romantic & Soft
-- **Social Platforms**: TikTok Ready, Instagram Optimized, Twitter Feed, Pinterest Style
 
 ## Performance
 
