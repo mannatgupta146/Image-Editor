@@ -80,6 +80,18 @@ const presets = {
     opacity: 100,
   },
 
+   vintage: {
+    brightness: 95,
+    contrast: 90,
+    saturation: 80,
+    hueRotation: 0,
+    blur: 0,
+    grayscale: 20,
+    sepia: 40,
+    invert: 0,
+    opacity: 100,
+  },
+
   warm: {
     brightness: 105,
     contrast: 105,
@@ -112,18 +124,6 @@ const presets = {
     blur: 0,
     grayscale: 100,
     sepia: 0,
-    invert: 0,
-    opacity: 100,
-  },
-
-  vintage: {
-    brightness: 95,
-    contrast: 90,
-    saturation: 80,
-    hueRotation: 0,
-    blur: 0,
-    grayscale: 20,
-    sepia: 40,
     invert: 0,
     opacity: 100,
   },
@@ -200,29 +200,6 @@ const presets = {
     opacity: 100,
   },
 
-  soft: {
-    brightness: 115,
-    contrast: 70,
-    saturation: 80,
-    hueRotation: 0,
-    blur: 1,
-    grayscale: 0,
-    sepia: 5,
-    invert: 0,
-    opacity: 90,
-  },
-
-  noir: {
-    brightness: 90,
-    contrast: 150,
-    saturation: 0,
-    hueRotation: 0,
-    blur: 0,
-    grayscale: 100,
-    sepia: 0,
-    invert: 0,
-    opacity: 100,
-  },
 
   midnight: {
     brightness: 85,
@@ -272,6 +249,66 @@ const presets = {
     opacity: 100,
   },
 
+  soft: {
+    brightness: 115,
+    contrast: 70,
+    saturation: 80,
+    hueRotation: 0,
+    blur: 1,
+    grayscale: 0,
+    sepia: 5,
+    invert: 0,
+    opacity: 90,
+  },
+
+  cyberpunk: {
+    brightness: 125,
+    contrast: 160,
+    saturation: 210,
+    hueRotation: 320,
+    blur: 0,
+    grayscale: 0,
+    sepia: 0,
+    invert: 0,
+    opacity: 100,
+  },
+
+  noir: {
+    brightness: 90,
+    contrast: 150,
+    saturation: 0,
+    hueRotation: 0,
+    blur: 0,
+    grayscale: 100,
+    sepia: 0,
+    invert: 0,
+    opacity: 100,
+  },
+
+  forest: {
+    brightness: 95,
+    contrast: 110,
+    saturation: 140,
+    hueRotation: 120,
+    blur: 0,
+    grayscale: 5,
+    sepia: 20,
+    invert: 0,
+    opacity: 100,
+  },
+
+  polaroid: {
+    brightness: 110,
+    contrast: 85,
+    saturation: 95,
+    hueRotation: 5,
+    blur: 0,
+    grayscale: 0,
+    sepia: 25,
+    invert: 0,
+    opacity: 95,
+  },
+
 }
 
 const presetsContainer = document.querySelector(".presets")
@@ -301,13 +338,28 @@ function createFilters() {
 }
 
 function createPresets() {
+  const presetButtons = {}
+  
   Object.keys(presets).forEach((key) => {
     const presetButton = document.createElement("button")
     presetButton.classList.add("btn")
     presetButton.innerText = key
+    presetButton.dataset.preset = key
     presetsContainer.appendChild(presetButton)
+    presetButtons[key] = presetButton
 
-    presetButton.addEventListener("click", () => {
+    presetButton.addEventListener("click", (e) => {
+      e.preventDefault()
+      
+      // Remove active from all buttons
+      Object.keys(presetButtons).forEach((k) => {
+        presetButtons[k].classList.remove("active")
+      })
+      
+      // Add active to clicked button
+      presetButton.classList.add("active")
+      
+      // Apply preset
       const preset = presets[key]
       Object.keys(preset).forEach((filterKey) => {
         filters[filterKey].value = preset[filterKey]
@@ -327,6 +379,11 @@ function createPresets() {
       applyFilters()
     })
   })
+
+  // Highlight "normal" preset by default when page loads
+  if (presetButtons["normal"]) {
+    presetButtons["normal"].classList.add("active")
+  }
 }
 
 createFilters()

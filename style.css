@@ -160,6 +160,7 @@
   position: relative;
   z-index: 2;
 }
+
 .sidebar::-webkit-scrollbar {
   width: 8px;
   background: transparent;
@@ -259,6 +260,13 @@
 .presets button:hover {
   background: #2196f3;
   color: #fff;
+}
+.presets button.active {
+  background: #2196f3;
+  color: #fff;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.15);
+  font-weight: 700;
 }
 
 @media (max-width: 1100px) {

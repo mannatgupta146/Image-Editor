@@ -76,7 +76,10 @@
       color: #fff;
       border: 2px solid #ef4444;
       box-shadow: none;
-      transition: background 0.18s, color 0.18s, border 0.18s;
+      transition:
+        background 0.18s,
+        color 0.18s,
+        border 0.18s;
     }
     .btn.reset:hover {
       background: #dc2626;
@@ -167,22 +170,22 @@
 
 // Sidebar
 .sidebar {
-    /* Custom scrollbar for sidebar */
-    &::-webkit-scrollbar {
-      width: 8px;
-      background: transparent;
-    }
-    &::-webkit-scrollbar-thumb {
-      background: rgba(33,150,243,0.18);
-      border-radius: 6px;
-      transition: background 0.2s;
-    }
-    &::-webkit-scrollbar-thumb:hover {
-      background: rgba(33,150,243,0.32);
-    }
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
+  /* Custom scrollbar for sidebar */
+  &::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(33, 150, 243, 0.18);
+    border-radius: 6px;
+    transition: background 0.2s;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(33, 150, 243, 0.32);
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
   width: 370px;
   max-width: 370px;
   min-width: 320px;
@@ -262,6 +265,13 @@
     &:hover {
       background: #2196f3;
       color: #fff;
+    }
+    &.active {
+      background: #2196f3;
+      color: #fff;
+      border-color: #2196f3;
+      box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.15);
+      font-weight: 700;
     }
   }
 }
