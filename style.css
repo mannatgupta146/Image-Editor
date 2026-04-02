@@ -122,7 +122,7 @@ main section .right .filters {
   flex-direction: column;
 }
 main section .right .filters p {
-  font-size: var(--font-lg);
+  font-size: var(--font-md);
 }
 main section .right .filters input {
   width: 100%;
