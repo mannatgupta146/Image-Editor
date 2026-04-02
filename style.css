@@ -65,6 +65,7 @@ main section .left .top .download {
   background-color: var(--btn-download);
 }
 main section .left .bottom {
+  position: relative;
   width: 100%;
   padding: var(--padding-equal-2xl);
   border-radius: var(--border-radius-lg);
@@ -75,18 +76,31 @@ main section .left .bottom {
   background-color: var(--bg-tertiary-color);
 }
 main section .left .bottom .placeholder {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: var(--gutter-sm);
   flex-direction: column;
   opacity: 0.5;
+  z-index: 1;
 }
 main section .left .bottom .placeholder i {
   font-size: 7rem;
 }
 main section .left .bottom .placeholder p {
   font-size: var(--font-lg);
+}
+main section .left .bottom canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+  max-width: 90%;
+  max-height: 90%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 main section .right {
   width: 35%;
@@ -112,16 +126,18 @@ main section .right .filters p {
 }
 main section .right .filters input {
   width: 100%;
-  background: transparent;
   border: none;
   outline: none;
   cursor: pointer;
-  appearance: none;
+  background: transparent;
   -webkit-appearance: none;
+  -moz-appearance: none;
+       appearance: none;
   transition: all 0.3s ease;
 }
 main section .right .filters input::-webkit-slider-thumb {
   -webkit-appearance: none;
+  appearance: none;
   width: 20px;
   height: 20px;
   border-radius: 50%;
