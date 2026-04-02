@@ -23,12 +23,6 @@ const filters = {
         max: 200,
         unit: '%'
     },
-    saturation: {
-        value: 0,
-        min: 0,
-        max: 200,
-        unit: '%'
-    },
     hueRotation: {
         value: 0,
         min: 0,
@@ -67,6 +61,31 @@ const filters = {
     }
 }
 
-function createFilterElement(name, unit = "%", value, min, max){
+const filtersConatiner = document.querySelector('.filters')
 
+function createFilterElement(name, unit = "%", value, min, max){
+    const div = document.createElement('div')
+    div.classList.add('filter')
+
+    const input = document.createElement('input')
+    input.type = 'range'
+    input.name = name
+    input.id = name
+    input.min = min
+    input.max = max
+    input.value = value
+    input.unit = unit
+
+    const p = document.createElement('p')
+    p.innerText = name
+
+    div.appendChild(p)
+    div.appendChild(input)
+
+    return div
 }
+
+Object.keys(filters).forEach(key=> {
+    const filterElement = createFilterElement(key, filters[key].unit, filters[key].value, filters[key].min, filters[key].max)
+    filtersConatiner.appendChild(filterElement)  
+})

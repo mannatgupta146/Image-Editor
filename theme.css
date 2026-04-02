@@ -8,7 +8,7 @@
     /* buttons */
     --btn-upload: cornflowerblue;
     --btn-reset: rgb(221, 43, 43);
-    --btn-download: rgb(20, 201, 20);
+    --btn-download: rgba(12, 165, 12, 0.87);
 
     /* text colors */
     --text-primary-color: rgb(255, 255, 255);
